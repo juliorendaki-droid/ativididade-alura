@@ -3,66 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro Post de Hardware</title>
+    <title>NutriVida Blog - O Poder da Banana</title>
     <style>
-        body {
+        /* Cores Temáticas de Banana */
+        :root {
+            --primary-color: #FBC02D; /* Amarelo Banana Maduro */
+            --primary-dark: #F57F17; /* Amarelo Escuro / Laranja */
+            --bg-color: #FFFDE7; /* Fundo Creme Suave */
+            --text-color: #263238; /* Cinza Escuro para Leitura */
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 0 20px;
-            color: #333;
-            background-color: #f9f9f9;
         }
+
+        /* Topo do Blog */
+        header {
+            background-color: var(--white);
+            border-bottom: 3px solid var(--primary-color);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+        }
+
+        header p {
+            font-style: italic;
+            color: #757575;
+        }
+
+        /* Layout Principal */
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Artigo */
         article {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        h1 {
-            color: #111;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .meta-info {
+
+        .post-meta {
             font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 20px;
+            color: #757575;
+            margin-bottom: 1.5rem;
         }
-        /* Estilização da imagem para o desafio */
-        .post-image {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 25px auto;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+        .post-title {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
         }
+
+        /* Banner do Post */
+        .post-banner {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
         p {
-            margin-bottom: 15px;
+            margin-bottom: 1.2rem;
             font-size: 1.1rem;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tabela Nutricional */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: #FFFDE7;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 0.8rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #FFF59D;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        /* SESSÃO DE REAÇÃO (LIKE FAKE) */
+        .reaction-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #F5F5F5;
+        }
+
+        .like-btn {
+            background-color: #F5F5F5;
+            border: 2px solid #E0E0E0;
+            color: #333;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .like-btn:hover {
+            background-color: #EEEEEE;
+            transform: scale(1.03);
+        }
+
+        /* Estado quando o usuário Clicar (Ativo) */
+        .like-btn.liked {
+            background-color: #FFE082;
+            border-color: var(--primary-color);
+            color: var(--primary-dark);
+        }
+
+        .like-btn .heart-icon {
+            color: #9e9e9e;
+            transition: color 0.2s ease;
+        }
+
+        .like-btn.liked .heart-icon {
+            color: #E53935; /* Coração Vermelho ao curtir */
+        }
+
+        /* Seção de Comentários Fake (Para dar realismo ao blog) */
+        .comments-section {
+            margin-top: 3rem;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .comment {
+            border-bottom: 1px solid #EEEEEE;
+            padding: 1rem 0;
+        }
+
+        .comment:last-child {
+            border: none;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .comment-text {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #263238;
+            color: #CFD8DC;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .post-title { font-size: 1.8rem; }
+            .post-banner { height: 200px; }
+            article { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <article>
-        <h1>A Importância do Fluxo de Ar no seu Setup</h1>
-        <div class="meta-info">Postado em 9 de Junho de 2026 por Lucas</div>
+    <header>
+        <h1>🍌 NutriVida Blog</h1>
+        <p>Sua dose diária de saúde, bem-estar e nutrição descomplicada.</p>
+    </header>
 
-        <p>Montar o seu próprio computador do zero é uma sensação incrível. Escolher cada componente, encaixar as peças no lugar e ver o sistema dar vídeo pela primeira vez traz um orgulho imenso. Porém, depois que tudo está funcionando, existe um fator invisível que dita a vida útil do seu PC: o <strong>fluxo de ar (airflow)</strong>.</p>
+    <main>
+        <article>
+            <div class="post-meta">Publicado em: 9 de Junho de 2026 • Por: Nutricionista Mariana Silva</div>
+            <h1 class="post-title">Superfood Amarela: 5 Vantagens Surpreendentes de Comer Banana Todos os Dias</h1>
+            
+            <!-- Imagem ilustrativa real do Unsplash -->
+            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cacho de bananas maduras" class="post-banner">
 
-        <!-- A IMAGEM DO DESAFIO -->
-        <!-- Dica: Substitua "gabinete-airflow.jpg" pelo nome do seu arquivo de imagem local -->
-        <img src="gabinete-airflow.jpg" 
-             alt="Visão lateral de um gabinete de computador com lateral de vidro aberta, mostrando três ventoinhas frontais iluminadas em azul que empurram o ar frio em direção à placa de vídeo e ao cooler do processador." 
-             class="post-image">
+            <p>Se existe uma fruta democrática, prática e saborosa no mundo, com certeza é a <strong>banana</strong>. Ela já vem embalada perfeitamente pela natureza, não precisa de talheres para descascar e combina com quase tudo: da aveia do café da manhã ao lanche rápido antes de ir para a academia.</p>
 
-        <p>Garantir que o ar frio entre pela parte frontal e o ar quente seja expelido pelas partes traseira e superior evita que seus componentes sofram com o temido <em>thermal throttling</em> (quando as peças reduzem o desempenho sozinhas para não queimarem). Um bom gerenciamento de cabos e a posição correta das ventoinhas mantêm suas taxas de quadros estáveis e o silêncio no quarto.</p>
+            <p>Mas além da praticidade óbvia, você sabe o que acontece com o seu corpo quando você consome essa fruta regularmente? Hoje vamos desmistificar a banana e te mostrar por que ela merece um espaço fixo na sua rotina alimentar.</p>
+
+            <h2>1. Uma Explosão de Energia Saudável e Rápida</h2>
+            <p>Está se sentindo cansado no meio da tarde ou precisa de um gás para o treino? A banana é a solução ideal. Rica em carboidratos de fácil digestão e vitamina B6, ela libera energia de forma gradual e saudável, evitando os picos e quedas bruscas de açúcar no sangue que os doces industriais causam.</p>
+
+            <h2>2. Proteção Blindada para o seu Coração</h2>
+            <p>O grande segredo mineral da banana é o famoso <strong>Potássio</strong>. Uma única fruta de tamanho médio é capaz de suprir cerca de 10% de toda a sua necessidade diária deste nutriente. O potássio atua diretamente no relaxamento das artérias e ajuda o corpo a eliminar o excesso de sódio através da urina, sendo uma arma poderosa no controle natural da pressão arterial.</p>
+
+            <h2>3. Intestino Regulado e Combate ao Inchaço</h2>
+            <p>Rica em fibras solúveis (como a pectina) e amido resistente, a banana funciona como um excelente combustível para as "bactérias do bem" que vivem no nosso intestino. Esse efeito prebiótico melhora a digestão, reduz a sensação de estufamento e ajuda a regular o trânsito intestinal.</p>
+
+            <h2>4. O Fim das Cãibras Musculares</h2>
+            <p>Quem pratica esportes ou costuma acordar no meio da noite com dores nas batatas das pernas sabe o quão ruim é uma cãibra. A combinação equilibrada de magnésio e potássio encontrada na banana atua diretamente na contração e relaxamento dos músculos, prevenindo esses espasmos dolorosos.</p>
+
+            <h2>5. Mais Bom Humor e Noites de Sono Tranquilas</h2>
+            <p>Você sabia que a banana pode te deixar mais feliz? Ela contém altos níveis de <strong>triptofano</strong>, um aminoácido essencial que o nosso cérebro utiliza para produzir serotonina — o famoso hormônio do bem-estar, do relaxamento e da felicidade. Comer uma banana no final do dia também ajuda a sinalizar para o corpo que é hora de desacelerar e dormir melhor.</p>
+
+            <h2>📊 Tabela Nutricional (Porção de 100g)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nutriente</th>
+                        <th>Quantidade</th>
+                        <th>Função Principal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calorias</td>
+                        <td>89 kcal</td>
+                        <td>Energia limpa para o dia</td>
+                    </tr>
+                    <tr>
+                        <td>Carboidratos</td>
+                        <td>23g</td>
+                        <td>Combustível muscular e cerebral</td>
+                    </tr>
+                    <tr>
+                        <td>Fibras</td>
+                        <td>2,6g</td>
+                        <td>Saciedade e saúde do intestino</td>
+                    </tr>
+                    <tr>
+                        <td>Potássio</td>
+                        <td>358mg</td>
+                        <td>Controle da pressão e coração</td>
+                    </tr>
+                    <tr>
+                        <td>Vitamina B6</td>
+                        <td>30% da IDR</td>
+                        <td>Equilíbrio do sistema nervoso</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- ÁREA DO CONTADOR DE LIKES FAKE -->
+            <div class="reaction-area">
+                <button class="like-btn" id="btnLike" aria-label="Curtir este post">
+                    <span class="heart-icon">❤</span> 
+                    <span id="txtLikes">1248</span> curtidas
+                </button>
+            </div>
+        </article>
+
+        <!-- SEÇÃO DE COMENTÁRIOS PARA REALISMO -->
+        <div class="comments-section">
+            <h3>Comentários (3)</h3>
+            <div class="comment">
+                <p class="comment-author">Carlos Eduardo</p>
+                <p class="comment-text">Eu como duas por dia antes do treino de corrida. Nunca mais tive cãibras, recomendo muito o post!</p>
+            </div>
+            <div class="comment">
+                <p class="comment-author">Ana Beatriz</p>
+                <p class="comment-text">Adorei a dica sobre o triptofano! Vou testar comer à noite para ver se melhora minha insônia.</p>
+            </div>
+            <div class="comment">
+                <p class="comment-author">Rodrigo M.</p>
+                <p class="comment-text">Muito bom o texto. Prático, rápido e direto ao ponto.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NutriVida Blog. Criado para fins demonstrativos escolares.</p>
+    </footer>
+
+    <!-- LÓGICA DO CONTADOR DE LIKES FAKE -->
+    <script>
+        // Configuração inicial do contador fake
+        const BASE_LIKES = 1248; // Número inicial "fake" que já aparece no site
         
-        <p>Se você acabou de montar sua máquina ou está pensando em fazer um upgrade de monitor ou placa de vídeo, lembre-se sempre de olhar como está a temperatura interna. Às vezes, posicionar uma única ventoinha do jeito certo já resolve aquele problema chato de superaquecimento!</p>
-    </article>
+        const btnLike = document.getElementById('btnLike');
+        const txtLikes = document.getElementById('txtLikes');
 
+        // Verifica no navegador se o usuário já clicou antes
+        let usuarioJaCurtiu = localStorage.getItem('bananaPostLiked') === 'true';
+
+        // Atualiza a tela baseado no histórico guardado
+        if (usuarioJaCurtiu) {
+            btnLike.classList.add('liked');
+            txtLikes.textContent = BASE_LIKES + 1;
+        } else {
+            txtLikes.textContent = BASE_LIKES;
+        }
+
+        // Evento de clique no botão de Like
+        btnLike.addEventListener('click', () => {
+            if (!usuarioJaCurtiu) {
+                // Se não curtiu: adiciona 1 like e muda o estilo
+                usuarioJaCurtiu = true;
+                btnLike.classList.add('liked');
+                txtLikes.textContent = BASE_LIKES + 1;
+                localStorage.setItem('bananaPostLiked', 'true');
+            } else {
+                // Se clicar de novo: remove o like do usuário
+                usuarioJaCurtiu = false;
+                btnLike.classList.remove('liked');
+                txtLikes.textContent = BASE_LIKES;
+                localStorage.setItem('bananaPostLiked', 'false');
+            }
+        });
+    </script>
 </body>
 </html>
